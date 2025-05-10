@@ -1,0 +1,16 @@
+actor: ApiTester
+modules:
+  enabled:
+    - REST:
+        url: http://localhost/api/
+        depends: Yii2
+    - Yii2:
+        # @TODO test用のconfigを用意する
+        configFile: 'config/test.php'
+    - \Helper\Api
+
+# actor: ApiTester
+# modules:
+#     enabled:
+#         - \Helper\Api
+        
