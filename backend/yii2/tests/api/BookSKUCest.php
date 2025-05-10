@@ -39,7 +39,7 @@ class BookSkuCest {
         Assert::assertEquals(0, count($I->grabDataFromResponseByJsonPath('$')[0]));
     }
 
-    public function getNotUuid(ApiTester $I) {
+    public function getInvalidBookIdBookSku(ApiTester $I) {
         $I->sendGET('/book-sku', ['book_id' => 'NotUuid']);
         $I->seeResponseCodeIs(400);
     }
