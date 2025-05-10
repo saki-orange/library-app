@@ -211,7 +211,6 @@ erDiagram
         string skuId PK
         string bookId FK
         date createdAt
-        date updatedAt
     }
     %% トランザクション
     USER ||--o{ LENDING : ""

@@ -2,7 +2,7 @@
 
 use \PHPUnit\Framework\Assert;
 
-class BookSKUCest {
+class BookSkuCest {
     const SCHEMA = [
         'id' => 'string',
         'book_id' => 'string',
@@ -15,14 +15,15 @@ class BookSKUCest {
         $this->book_id_example = $I->grabDataFromResponseByJsonPath('$[0].id')[0];
     }
 
-    public function getAllBookSKU(ApiTester $I) {
+    public function getAllBookSku(ApiTester $I) {
         $I->sendGET('/book-sku');
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         $I->seeResponseMatchesJsonType(self::SCHEMA, "$[*]");
+        Assert::assertEquals(6, count($I->grabDataFromResponseByJsonPath('$')[0]));
     }
 
-    public function getBookSKUByBookId(ApiTester $I) {
+    public function getBookSkuByBookId(ApiTester $I) {
         $I->sendGET('/book-sku', ['book_id' => $this->book_id_example]);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
@@ -31,10 +32,22 @@ class BookSKUCest {
         Assert::assertEquals(2, count($I->grabDataFromResponseByJsonPath('$')[0]));
     }
 
-    public function getUndefinedBookSKU(ApiTester $I) {
-        $I->sendGET('/book-sku', ['book_id' => 'UndefinedBookId']);
+    public function getUndefinedBookSku(ApiTester $I) {
+        $I->sendGET('/book-sku', ['book_id' => '5890442b-1363-4330-91b6-35696343a5e4']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         Assert::assertEquals(0, count($I->grabDataFromResponseByJsonPath('$')[0]));
+    }
+
+    public function getNotUuid(ApiTester $I) {
+        $I->sendGET('/book-sku', ['book_id' => 'NotUuid']);
+        $I->seeResponseCodeIs(400);
+    }
+
+    public function createUndefinedBookSku(ApiTester $I) {
+        $I->sendPOST('/book-sku', [
+            'book_id' => '5890442b-1363-4330-91b6-35696343a5e4',
+        ]);
+        $I->seeResponseCodeIs(422);
     }
 }

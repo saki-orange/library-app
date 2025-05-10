@@ -63,7 +63,7 @@ $config = [
                 'POST api/books' => 'book/create',
                 'PUT api/books/<id>' => 'book/update',
                 'DELETE api/books/<id>' => 'book/delete',
-                // BookSKU
+                // BookSku
                 'GET api/book-sku' => 'book-sku/index',
                 'POST api/book-sku' => 'book-sku/create',
                 'PUT api/book-sku/<id>' => 'book-sku/update',
