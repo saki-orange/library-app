@@ -32,7 +32,7 @@ class BookSkuCest {
         Assert::assertEquals(2, count($I->grabDataFromResponseByJsonPath('$')[0]));
     }
 
-    public function getUndefinedBookSku(ApiTester $I) {
+    public function getNotFoundBookSku(ApiTester $I) {
         $I->sendGET('/book-sku', ['book_id' => '5890442b-1363-4330-91b6-35696343a5e4']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
@@ -44,7 +44,7 @@ class BookSkuCest {
         $I->seeResponseCodeIs(400);
     }
 
-    public function createUndefinedBookSku(ApiTester $I) {
+    public function createNotFoundBookSku(ApiTester $I) {
         $I->sendPOST('/book-sku', [
             'book_id' => '5890442b-1363-4330-91b6-35696343a5e4',
         ]);

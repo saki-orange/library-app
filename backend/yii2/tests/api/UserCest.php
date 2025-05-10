@@ -31,8 +31,8 @@ class UserCest {
         $I->seeResponseContainsJson(['email' => 'test1@example.com'], '$[0]');
     }
 
-    public function getUndefinedUser(ApiTester $I) {
-        $I->sendGET('/users', ['email' => 'undefined@example.com']);
+    public function getNotFoundUser(ApiTester $I) {
+        $I->sendGET('/users', ['email' => 'NotFound@example.com']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         Assert::assertEquals(0, count($I->grabDataFromResponseByJsonPath('$')[0]));

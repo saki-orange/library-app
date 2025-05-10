@@ -42,8 +42,8 @@ class BookCest {
         $I->seeResponseContainsJson(['title' => 'Sample Book 1'], '$[0]');
     }
 
-    public function getUndefinedBook(ApiTester $I) {
-        $I->sendGET('/books', ['title' => 'UndefinedBook']);
+    public function getNotFoundBook(ApiTester $I) {
+        $I->sendGET('/books', ['title' => 'NotFoundBook']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         Assert::assertEquals(0, count($I->grabDataFromResponseByJsonPath('$')[0]));
