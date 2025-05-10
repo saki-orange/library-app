@@ -14,6 +14,7 @@ class m250510_083755_create_book_sku_table extends Migration {
             // PostgreSQL依存
             'id' => 'UUID primary key default gen_random_uuid()',
             'book_id' => 'UUID not null',
+            'created_at' => 'TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP',
         ]);
 
         $this->addForeignKey(
