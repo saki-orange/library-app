@@ -213,16 +213,15 @@ erDiagram
         date createdAt
     }
     %% トランザクション
-    USER ||--o{ LENDING : ""
-    BOOK_SKU ||--o| LENDING : ""
-    LENDING {
-        string LendingId PK
+    USER ||--o{ LOAN : ""
+    BOOK_SKU ||--o| LOAN : ""
+    LOAN {
+        string loanId PK
         string skuId FK
         string userId FK
         date returnDate
-        %% 貸出中/貸出延長/返却完了(削除)
-        string status
         date createdAt
+        date updatedAt
     }
     %% トランザクション
     USER ||--o{ RESERVATION : ""

@@ -68,10 +68,11 @@ $config = [
                 'POST api/book-sku' => 'book-sku/create',
                 'PUT api/book-sku/<id>' => 'book-sku/update',
                 'DELETE api/book-sku/<id>' => 'book-sku/delete',
-                // Lending
-                'GET api/lendings' => 'lending/index',
-                'POST api/lendings' => 'lending/create',
-                'DELETE api/lendings/<id>' => 'lending/delete',
+                // Loan
+                'GET api/loans' => 'loan/index',
+                'POST api/loans' => 'loan/create',
+                'POST api/loans/<id>/extensions' => 'loan/extend',
+                'DELETE api/loans/<id>' => 'loan/delete',
                 // Reservation
                 'GET api/reservations' => 'reservation/index',
                 'POST api/reservations' => 'reservation/create',
