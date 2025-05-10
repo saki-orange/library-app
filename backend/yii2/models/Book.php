@@ -39,7 +39,7 @@ class Book extends ActiveRecord {
         return [
             [['title', 'author', 'publisher', 'published_date', 'isbn'], 'required'],
             [['title', 'author', 'publisher', 'isbn', "image_url"], 'string', 'max' => 255],
-            ['published_date', 'date'],
+            ['published_date', 'date', 'format' => 'php:Y-m-d'],
             ['isbn', 'unique'],
         ];
     }

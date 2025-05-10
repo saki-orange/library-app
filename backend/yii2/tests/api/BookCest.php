@@ -48,4 +48,30 @@ class BookCest {
         $I->seeResponseIsJson();
         Assert::assertEquals(0, count($I->grabDataFromResponseByJsonPath('$')[0]));
     }
+
+    /**
+     * Bookを作成するとbook_skuも作成されることを確認
+     */
+    public function createBook(ApiTester $I) {
+        $I->sendPOST('/books', [
+            'title' => 'Sample Book 999',
+            'author' => 'Sample Author',
+            'publisher' => 'Sample Publisher',
+            'published_date' => '2023-01-01',
+            'isbn' => '999-9-999999-9-9',
+            'image_url' => '/upload/book/sample999.jpg',
+        ]);
+        $I->seeResponseCodeIs(201);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesJsonType(self::SCHEMA, '$');
+
+        $I->sendGET('/book-sku', ['book_id' => $I->grabDataFromResponseByJsonPath('$.id')[0]]);
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+        $I->seeResponseMatchesJsonType([
+            'id' => 'string',
+            'book_id' => 'string',
+        ], '$[*]');
+        Assert::assertEquals(1, count($I->grabDataFromResponseByJsonPath('$')[0]));
+    }
 }
