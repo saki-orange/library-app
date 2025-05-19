@@ -10,9 +10,14 @@ class UserCest {
         'password' => 'string',
     ];
 
-    public function _before(ApiTester $I) {
+    public function _fixtures() {
+        return [
+            'users' => ['class' => \app\tests\fixtures\UserFixture::class, 'dataFile' => '@app/tests/fixtures/data/user1.php'],
+        ];
     }
 
+    public function _before(ApiTester $I) {
+    }
 
     public function getAllUsers(ApiTester $I) {
         $I->sendGET('/users');
@@ -22,13 +27,13 @@ class UserCest {
     }
 
     public function getUsersByEmail(ApiTester $I) {
-        $I->sendGET('/users', ['email' => 'test1@example.com']);
+        $I->sendGET('/users', ['email' => 'user1@example.com']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         $I->seeResponseMatchesJsonType(self::SCHEMA, "$[*]");
         // 1件のみデータが取得できることを確認
         Assert::assertEquals(1, count($I->grabDataFromResponseByJsonPath('$')[0]));
-        $I->seeResponseContainsJson(['email' => 'test1@example.com'], '$[0]');
+        $I->seeResponseContainsJson(['email' => 'user1@example.com'], '$[0]');
     }
 
     public function getNotFoundUser(ApiTester $I) {

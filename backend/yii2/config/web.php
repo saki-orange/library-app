@@ -71,14 +71,15 @@ $config = [
                 'POST api/loans' => 'loan/create',
                 'POST api/loans/<id>/extensions' => 'loan/extend',
                 'DELETE api/loans/<id>' => 'loan/delete',
+                // Hold
+                'GET api/holds' => 'hold/index',
+                'POST api/holds' => 'hold/create',
+                'PATCH api/holds/<id>' => 'hold/update', // statusの更新用
+                'DELETE api/holds/<id>' => 'hold/delete',
                 // Reservation
                 'GET api/reservations' => 'reservation/index',
                 'POST api/reservations' => 'reservation/create',
                 'DELETE api/reservations/<id>' => 'reservation/delete',
-                // Hold
-                'GET api/holds' => 'hold/index',
-                'POST api/holds' => 'hold/create',
-                'DELETE api/holds/<id>' => 'hold/delete',
             ],
         ],
     ],

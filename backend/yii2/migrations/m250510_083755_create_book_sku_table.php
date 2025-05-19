@@ -26,24 +26,6 @@ class m250510_083755_create_book_sku_table extends Migration {
             'NO ACTION',
             'NO ACTION'
         );
-
-        if (YII_ENV_DEV) {
-            // bookテーブルからIDを取得
-            $books = (new \yii\db\Query())
-                ->select('id')
-                ->from('{{%book}}')
-                ->all();
-
-            // book_skuテーブルにデータを挿入
-            foreach ($books as $book) {
-                $this->insert('{{%book_sku}}', [
-                    'book_id' => $book['id'],
-                ]);
-                $this->insert('{{%book_sku}}', [
-                    'book_id' => $book['id'],
-                ]);
-            }
-        }
     }
 
     /**

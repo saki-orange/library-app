@@ -13,6 +13,12 @@ class BookCest {
         'image_url' => 'string',
     ];
 
+    public function _fixtures() {
+        return [
+            'users' => ['class' => \app\tests\fixtures\BookFixture::class, 'dataFile' => '@app/tests/fixtures/data/book1.php'],
+        ];
+    }
+
     public function _before(ApiTester $I) {
     }
 
@@ -24,22 +30,22 @@ class BookCest {
     }
 
     public function getBooksByTitleSample(ApiTester $I) {
-        $I->sendGET('/books', ['title' => 'Sample']);
+        $I->sendGET('/books', ['title' => 'Programming']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
-        $I->seeResponseMatchesJsonType(array_merge(self::SCHEMA, ['title' => 'string:regex(~Sample~)']), "$[*]");
-        // 3件のみデータが取得できることを確認
-        Assert::assertEquals(3, count($I->grabDataFromResponseByJsonPath('$')[0]));
+        $I->seeResponseMatchesJsonType(array_merge(self::SCHEMA, ['title' => 'string:regex(~Programming~)']), "$[*]");
+        // 2件のみデータが取得できることを確認
+        Assert::assertEquals(2, count($I->grabDataFromResponseByJsonPath('$')[0]));
     }
 
     public function getBooksByTitleSample1(ApiTester $I) {
-        $I->sendGET('/books', ['title' => 'Sample Book 1']);
+        $I->sendGET('/books', ['title' => 'Network']);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
         $I->seeResponseMatchesJsonType(self::SCHEMA, "$[*]");
         // 1件のみデータが取得できることを確認
         Assert::assertEquals(1, count($I->grabDataFromResponseByJsonPath('$')[0]));
-        $I->seeResponseContainsJson(['title' => 'Sample Book 1'], '$[0]');
+        $I->seeResponseContainsJson(['title' => 'New Network Programming'], '$[0]');
     }
 
     public function getNotFoundBook(ApiTester $I) {

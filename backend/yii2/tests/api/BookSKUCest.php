@@ -9,6 +9,12 @@ class BookSkuCest {
     ];
     protected string $book_id_example;
 
+    public function _fixtures() {
+        return [
+            'users' => ['class' => \app\tests\fixtures\BookSkuFixture::class, 'dataFile' => '@app/tests/fixtures/data/book_sku1.php'],
+        ];
+    }
+
     public function _before(ApiTester $I) {
         $I->sendGET('/books');
         $I->seeResponseCodeIs(200);
