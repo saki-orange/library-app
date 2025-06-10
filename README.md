@@ -1,4 +1,4 @@
-# 図書館システム
+# 図書館システム (WIP)
 ## Installation
 ### 必要なファイル
 - `backend/.env`
