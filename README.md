@@ -1,4 +1,7 @@
 # 図書館システム (WIP)
+[仕様](docs/architecture.md)
+
+
 ## Installation
 ### 必要なファイル
 - `backend/.env`
